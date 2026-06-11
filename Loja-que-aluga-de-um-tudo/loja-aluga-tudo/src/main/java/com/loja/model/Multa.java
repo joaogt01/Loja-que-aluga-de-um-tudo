@@ -6,8 +6,11 @@ public class Multa {
     private String motivo;
     private boolean paga;
 
-    public Multa(){
-
+    public Multa(String id, double valor, String motivo){
+        this.id = id;
+        this.valor = valor;
+        this.motivo = motivo;
+        this.paga = false;
     }
 
     public String getId(){
