@@ -19,15 +19,13 @@ public class Administrador extends Usuario{
     public int getNivelAcesso(){
         return nivelAcesso;
     }
-
-    public void setNivelAcesso(int nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
-    }
-
     public String getDepartamento(){
         return departamento;
     }
 
+    public void setNivelAcesso(int nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
