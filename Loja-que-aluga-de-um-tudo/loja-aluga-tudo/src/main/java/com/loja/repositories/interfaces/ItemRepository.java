@@ -12,7 +12,7 @@ public interface ItemRepository {
     public Map<String, Item> listarPorCategoria(String categoriaId);
     public Map<String, Item> listarPorFornecedor(String fornecedorId);
 
-    public void atualizar(Item item);
+    public boolean atualizar(Item item);
     public boolean deletar(String id);
 
     public void carregarDados();

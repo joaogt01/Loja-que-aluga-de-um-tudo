@@ -9,7 +9,7 @@ public interface CategoriaRepository {
     // O conjunto chave-valor vai ser String-Objeto, sendo a String o ID para o hashmap
     public Map<String, Categoria> listar();
 
-    public void atualizar(Categoria categoria);
+    public boolean atualizar(Categoria categoria);
     public boolean deletar(String id);
 
     public void carregarDados();
