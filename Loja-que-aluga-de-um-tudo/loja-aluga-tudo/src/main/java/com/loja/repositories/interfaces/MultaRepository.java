@@ -1,4 +1,4 @@
-package com.loja.repositories;
+package com.loja.repositories.interfaces;
 
 import com.loja.model.Multa;
 import java.util.List;

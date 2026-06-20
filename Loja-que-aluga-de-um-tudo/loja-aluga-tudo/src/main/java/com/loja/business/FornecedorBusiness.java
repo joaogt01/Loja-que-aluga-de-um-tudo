@@ -1,7 +1,7 @@
 package com.loja.business;
 
 import com.loja.model.Fornecedor;
-import com.loja.repositories.FornecedorRepository;
+import com.loja.repositories.interfaces.FornecedorRepository;
 
 public class FornecedorBusiness {
     private FornecedorRepository fornecedorRepository;

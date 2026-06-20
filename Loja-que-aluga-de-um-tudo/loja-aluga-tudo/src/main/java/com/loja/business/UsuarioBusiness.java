@@ -1,7 +1,7 @@
 package com.loja.business;
 
 import com.loja.model.Usuario;
-import com.loja.repositories.UsuarioRepository;
+import com.loja.repositories.interfaces.UsuarioRepository;
 
 import java.util.List;
 
