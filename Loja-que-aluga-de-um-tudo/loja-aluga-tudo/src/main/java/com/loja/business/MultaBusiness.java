@@ -35,6 +35,8 @@ public class MultaBusiness {
         Multa novaMulta = new Multa(null, contrato, "Atraso na devolução do item", valorTaxaDiaria, diasAtraso, "PENDENTE");
 
         multaRepository.salvar(novaMulta);
+
+        return novaMulta;
     }
 
     public double calcularAtraso(ContratoAluguel contrato){
