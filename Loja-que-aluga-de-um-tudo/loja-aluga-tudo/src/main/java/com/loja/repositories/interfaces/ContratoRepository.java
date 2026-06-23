@@ -13,9 +13,9 @@ public interface ContratoRepository {
     Map<String, ContratoAluguel> listarPorCliente(String clienteId);
     Map<String, ContratoAluguel> listarPorStatus(String status);
 
-    void atualizar(String id);
-    void deletar(String id);
+    boolean atualizar(ContratoAluguel contrato);
+    boolean deletar(String id);
 
-    void carregarDados();
-    void salvarDados();
+    public void carregarDados();
+    public void salvarDados();
 }

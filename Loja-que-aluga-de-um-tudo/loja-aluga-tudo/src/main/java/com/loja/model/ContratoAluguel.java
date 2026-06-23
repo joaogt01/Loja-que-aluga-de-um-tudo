@@ -13,7 +13,7 @@ public class ContratoAluguel {
     private String status;
     private Boolean historico;
 
-    public ContratoAluguel(String id, Cliente cliente, Item item, LocalDate dataRetirada, LocalDate dataPrevDevolucao, LocalDate dataEfetivaDevolucao, double valorTotal){
+    public ContratoAluguel(String id, Cliente cliente, Item item, LocalDate dataRetirada, LocalDate dataPrevDevolucao, LocalDate dataEfetivaDevolucao, double valorTotal, String status){
         this.id = id;
         this.cliente = cliente;
         this.item = item;
@@ -21,6 +21,8 @@ public class ContratoAluguel {
         this.dataPrevDevolucao = dataPrevDevolucao;
         this.dataEfetivaDevolucao = dataEfetivaDevolucao;
         this.valorTotal = valorTotal;
+        this.status = status;
+        this.historico = false;
     }
 
     //getters:

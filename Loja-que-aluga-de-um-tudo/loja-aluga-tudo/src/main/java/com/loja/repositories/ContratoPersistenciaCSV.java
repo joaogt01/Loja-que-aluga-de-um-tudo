@@ -1,5 +1,138 @@
-package com.loja.repositories;
+    package com.loja.repositories;
 
-public class ContratoPersistenciaCSV {
+    import com.loja.model.Cliente;
+    import com.loja.model.ContratoAluguel;
+    import com.loja.model.Item;
+    import com.loja.repositories.interfaces.ContratoRepository;
 
-}
+    import java.io.*;
+    import java.math.BigDecimal;
+    import java.time.LocalDate;
+    import java.util.Collections;
+    import java.util.HashMap;
+    import java.util.Map;
+    import java.util.stream.Collectors;
+
+    public class ContratoPersistenciaCSV implements ContratoRepository {
+
+        private String caminhoArquivo;
+        private Map<String, ContratoAluguel> contratos;
+
+        public ContratoPersistenciaCSV(String caminhoArquivo){
+            this.caminhoArquivo = caminhoArquivo;
+            this.contratos = new HashMap<>();
+            this.carregarDados();
+        }
+
+        @Override
+        public void salvar(ContratoAluguel contrato) {
+            contratos.put(contrato.getId(), contrato);
+        }
+
+        @Override
+        public ContratoAluguel buscar(String id) {
+            return contratos.get(id);
+        }
+
+        @Override
+        public Map<String, ContratoAluguel> listar() {
+            return Collections.unmodifiableMap(contratos);
+        }
+
+        @Override
+        public Map<String, ContratoAluguel> listarPorCliente(String clienteId) {
+            return this.contratos.entrySet().stream()
+                    .filter(valorFiltrado -> valorFiltrado.getValue().getCliente().equals(clienteId))
+                    .collect(Collectors.toMap(Map.Entry::getKey, valorFiltrado -> valorFiltrado.getValue()));
+        }
+
+        @Override
+        public Map<String, ContratoAluguel> listarPorStatus(String status) {
+            return this.contratos.entrySet().stream()
+                    .filter(valorFiltrado -> valorFiltrado.getValue().getStatus().equals(status))
+                    .collect(Collectors.toMap(Map.Entry::getKey, valorFiltrado -> valorFiltrado.getValue()));
+        }
+
+        @Override
+        public boolean atualizar(ContratoAluguel contrato) {
+            if (this.contratos.containsKey(contrato.getId())) {
+                contratos.put(contrato.getId(), contrato);
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean deletar(String id) {
+            if (this.contratos.containsKey(id)) {
+                this.contratos.remove(id);
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void carregarDados() {
+            try (BufferedReader leitor = new BufferedReader(new FileReader(this.caminhoArquivo))) {
+                String linha = leitor.readLine();
+
+                if (linha != null && linha.toLowerCase().startsWith("id;cliente")) {
+                    linha = leitor.readLine();
+                }
+
+                while (linha != null) {
+                    String[] dados = linha.split(";");
+
+                    if (dados.length >= 9) {
+                        String id = dados[0];
+                        String clienteId = dados[1];
+                        String itemId = dados[2];
+                        LocalDate dataRetirada = LocalDate.parse(dados[3]);
+                        LocalDate dataPrevDevolucao = LocalDate.parse(dados[4]);
+                        LocalDate dataEfetivaDevolucao = dados[5].isBlank() ? null : LocalDate.parse(dados[5]);
+                        double valorTotal = Double.parseDouble(dados[6]);
+                        String status = dados[7];
+                        boolean historico = Boolean.parseBoolean(dados[8]);
+
+                        Cliente cliente = new Cliente(clienteId, "VAZIO", "VAZIO", "VAZIO");
+                        Item item = new Item(itemId, "VAZIO", null, null, "VAZIO", null, null);
+
+                        ContratoAluguel contrato = new ContratoAluguel(
+                                id, cliente, item,
+                                dataRetirada, dataPrevDevolucao,
+                                dataEfetivaDevolucao, valorTotal, status
+                        );
+                        contrato.setHistorico(historico);
+
+                        this.contratos.put(contrato.getId(), contrato);
+                    }
+                    linha = leitor.readLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Override
+        public void salvarDados() {
+            try(BufferedWriter escritor = new BufferedWriter(new FileWriter(this.caminhoArquivo))){
+                escritor.write("id;cliente;item;dataRetirada;dataPrevDevolucao;dataEfetivaDevolucao;valorTotal;status;historico");
+
+                for (ContratoAluguel contrato : this.contratos.values()) {
+                    String linhas = contrato.getId() + ";"
+                            + contrato.getCliente() + ";"
+                            +contrato.getItem() + ";"
+                            + contrato.getDataRetirada() + ";"
+                            + contrato.getDataPrevDevolucao() + ";"
+                            + contrato.getDataEfetivaDevolucao() + ";"
+                            + contrato.getValorTotal() + ";"
+                            + contrato.getStatus() + ";"
+                            + contrato.getHistorico() + ";";
+                    escritor.write(linhas);
+                    escritor.newLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
