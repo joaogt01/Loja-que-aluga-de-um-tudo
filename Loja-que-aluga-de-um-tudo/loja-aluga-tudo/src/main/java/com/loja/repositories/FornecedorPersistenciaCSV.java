@@ -1,14 +1,12 @@
 package com.loja.repositories;
 
 import com.loja.model.Fornecedor;
-import com.loja.model.Item;
 import com.loja.repositories.interfaces.IFornecedorRepository;
 
 import java.io.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class FornecedorPersistenciaCSV implements IFornecedorRepository {
     
