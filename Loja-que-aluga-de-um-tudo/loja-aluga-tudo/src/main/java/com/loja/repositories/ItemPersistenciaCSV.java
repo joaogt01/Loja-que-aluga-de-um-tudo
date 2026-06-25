@@ -51,7 +51,7 @@ public class ItemPersistenciaCSV implements IItemRepository {
 
     // lista os itens com base em status, categoria ou fornecedor
     @Override
-    public Map<String, Item> listar(Fornecedor fornecedor) {
+    public Map<String, Item> listar(String status) {
         return this.itens.entrySet().stream()
                 // filtra os itens por status (ignorando miuscula e minuscula)
                 .filter(valorfiltrado -> valorfiltrado.getValue().getStatus().equalsIgnoreCase(status))
@@ -63,16 +63,16 @@ public class ItemPersistenciaCSV implements IItemRepository {
     public Map<String, Item> listar(Categoria categoria) {
         return this.itens.entrySet().stream()
                 // filtra os itens por categoria com base no id
-                .filter(valorfiltrado -> valorfiltrado.getValue().getCategoria().getId().equals(categoriaId))
+                .filter(valorfiltrado -> valorfiltrado.getValue().getCategoria().getId().equals(categoria.getId()))
                 // "coleciona" os resultados em um Map<String, Item>, por padrão já é hashmap
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     @Override
-    public Map<String, Item> listarPorFornecedor(String fornecedorId) {
+    public Map<String, Item> listar(Fornecedor fornecedor) {
         return this.itens.entrySet().stream()
                 // filtra os itens por fornecedor com base no id
-                .filter(valorfiltrado -> valorfiltrado.getValue().getFornecedor().getId().equals(fornecedorId))
+                .filter(valorfiltrado -> valorfiltrado.getValue().getFornecedor().getId().equals(fornecedor.getId()))
                 // "coleciona" os resultados em um Map<String, Item>, por padrão já é hashmap
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }

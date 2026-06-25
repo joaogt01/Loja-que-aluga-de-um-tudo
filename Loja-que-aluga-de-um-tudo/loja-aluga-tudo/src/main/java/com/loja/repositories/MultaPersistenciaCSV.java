@@ -1,7 +1,9 @@
 package com.loja.repositories;
 
+import com.loja.model.Cliente;
 import com.loja.model.ContratoAluguel;
 import com.loja.model.Multa;
+import com.loja.repositories.interfaces.IMultaRepository;
 import com.loja.repositories.interfaces.MultaRepository;
 
 import java.io.*;
@@ -11,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MultaPersistenciaCSV implements MultaRepository {
+public class MultaPersistenciaCSV implements IMultaRepository {
     private String caminhoArquivo;
     private Map<String, Multa> multas;
 
@@ -63,18 +65,18 @@ public class MultaPersistenciaCSV implements MultaRepository {
     }
 
     @Override
-    public Map<String, Multa> listarPorStatus(String status) {
+    public Map<String, Multa> listar(Cliente cliente) {
         return this.multas.entrySet().stream()
-                .filter(valorfiltrado -> valorfiltrado.getValue().getStatus().equalsIgnoreCase(status))
+                .filter(valorfiltrado -> valorfiltrado.getValue().getContrato() != null 
+                        && valorfiltrado.getValue().getContrato().getCliente() != null 
+                        && valorfiltrado.getValue().getContrato().getCliente().getId().equals(cliente.getId()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     @Override
-    public Map<String, Multa> listarPorCliente(String clienteId) {
+    public Map<String, Multa> listar(String status) {
         return this.multas.entrySet().stream()
-                .filter(valorfiltrado -> valorfiltrado.getValue().getContrato() != null 
-                        && valorfiltrado.getValue().getContrato().getCliente() != null 
-                        && valorfiltrado.getValue().getContrato().getCliente().getId().equals(clienteId))
+                .filter(valorfiltrado -> valorfiltrado.getValue().getStatus().equalsIgnoreCase(status))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
