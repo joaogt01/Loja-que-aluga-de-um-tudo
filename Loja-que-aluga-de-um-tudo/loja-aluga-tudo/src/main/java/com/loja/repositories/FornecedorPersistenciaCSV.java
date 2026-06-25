@@ -1,6 +1,7 @@
 package com.loja.repositories;
 
 import com.loja.model.Fornecedor;
+import com.loja.model.Item;
 import com.loja.repositories.interfaces.IFornecedorRepository;
 
 import java.io.*;
@@ -91,4 +92,27 @@ public class FornecedorPersistenciaCSV implements IFornecedorRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void salvarDados() {
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter(this.caminhoArquivo))){
+            escritor.write("id;nome;cnpj;telefone;historico");
+            escritor.newLine();
+
+            for(Fornecedor fornecedor : this.fornecedores.values()){
+                String linha = fornecedor.getId() + ";" +
+                                fornecedor.getNome() + ";" +
+                                fornecedor.getCnpj() + ";" +
+                                fornecedor.getTelefone() + ";" +
+                                fornecedor.hasHistorico();
+                escritor.write(linha);
+                escritor.newLine();
+            }
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
+
+
