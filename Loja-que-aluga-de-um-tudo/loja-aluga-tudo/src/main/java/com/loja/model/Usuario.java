@@ -6,6 +6,7 @@ public abstract class Usuario {
     private String nome;
     private String login;
     private String senha;
+    private boolean ativo;
 
     public Usuario(String id, String nome, String login, String senha) {
         this.id = id;
@@ -13,6 +14,7 @@ public abstract class Usuario {
         this.login = login;
         this.senha = senha;
     }
+    public Usuario(){};
 
     public abstract String getPerfil();
 
@@ -28,6 +30,9 @@ public abstract class Usuario {
     public String getSenha() {
         return senha;
     }
+    public boolean isAtivo() {
+        return ativo;
+    }
 
     public void setId(String id){
         this.id = id;
@@ -41,5 +46,7 @@ public abstract class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }

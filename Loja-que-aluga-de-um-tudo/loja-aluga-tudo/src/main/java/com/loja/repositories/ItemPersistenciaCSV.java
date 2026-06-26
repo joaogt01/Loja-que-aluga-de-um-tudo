@@ -126,8 +126,10 @@ public class ItemPersistenciaCSV implements IItemRepository {
                     * e atualizar o objeto corretamente
                     */
 
-                    Categoria categoria = new Categoria(dados[5], "VAZIO");
-                    Fornecedor fornecedor = new Fornecedor(dados[6], "VAZIO", "VAZIO", "VAZIO");
+                    Categoria categoria = new Categoria();
+                    categoria.setId(dados[5]);
+                    Fornecedor fornecedor = new Fornecedor();
+                    fornecedor.setId(dados[6]);
 
                     boolean historico = Boolean.parseBoolean(dados[7]);
 

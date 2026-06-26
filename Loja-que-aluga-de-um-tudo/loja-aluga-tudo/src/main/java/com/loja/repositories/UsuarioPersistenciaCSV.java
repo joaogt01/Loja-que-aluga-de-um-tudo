@@ -45,7 +45,7 @@ public class UsuarioPersistenciaCSV implements IUsuarioRepository {
     }
 
     @Override
-    public Map<String, Usuario> listarPorPerfil(String perfil){
+    public Map<String, Usuario> listar(String perfil){
         return this.usuarios.entrySet().stream()
                 .filter(entry -> entry.getValue().getPerfil().equalsIgnoreCase(perfil))
                 .collect(Collectors.toMap(
@@ -89,6 +89,7 @@ public class UsuarioPersistenciaCSV implements IUsuarioRepository {
                     String login = dados[2];
                     String senha = dados[3];
                     String perfil = dados[4];
+                    boolean ativo = Boolean.parseBoolean(dados[5]);
 
                     Usuario usuario = null;
                     if (perfil.equalsIgnoreCase("ADMIN")) {
@@ -108,7 +109,7 @@ public class UsuarioPersistenciaCSV implements IUsuarioRepository {
     @Override
     public void salvarDados() {
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(caminhoArquivo))) {
-            escritor.write("id;nome;login;senha;perfil");
+            escritor.write("id;nome;login;senha;perfil;ativo");
             escritor.newLine();
 
             for (Usuario usuario : usuarios.values()) {
@@ -117,7 +118,8 @@ public class UsuarioPersistenciaCSV implements IUsuarioRepository {
                         usuario.getNome() + ";" +
                         usuario.getLogin() + ";" +
                         usuario.getSenha() + ";" +
-                        usuario.getPerfil();
+                        usuario.getPerfil() + ";" +
+                        usuario.isAtivo();
                 escritor.write(linha);
                 escritor.newLine();
             }

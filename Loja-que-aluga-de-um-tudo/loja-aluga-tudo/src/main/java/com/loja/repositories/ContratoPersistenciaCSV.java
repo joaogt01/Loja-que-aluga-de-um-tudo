@@ -93,8 +93,10 @@
                         String status = dados[7];
                         boolean historico = Boolean.parseBoolean(dados[8]);
 
-                        Cliente cliente = new Cliente(clienteId, "VAZIO", "VAZIO", "VAZIO");
-                        Item item = new Item(itemId, "VAZIO", null, null, "VAZIO", null, null);
+                        Cliente cliente = new Cliente();
+                        cliente.setId(clienteId);
+                        Item item = new Item();
+                        item.setId(itemId);
 
                         ContratoAluguel contrato = new ContratoAluguel(
                                 id, cliente, item,

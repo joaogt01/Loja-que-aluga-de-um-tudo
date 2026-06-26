@@ -11,6 +11,8 @@ public class Categoria {
         this.historico = false;
     }
 
+    public Categoria(){};
+
     public String getId() {
         return id;
     }

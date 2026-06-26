@@ -21,6 +21,7 @@ public class Item {
         this.fornecedor = fornecedor;
         this.historico = false;
     }
+    public Item(){};
 
     public String getId() {
         return id;
