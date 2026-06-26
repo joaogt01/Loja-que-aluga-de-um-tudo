@@ -1,12 +1,13 @@
 package com.loja.business;
 
+import com.loja.business.interfaces.IUsuarioBusiness;
 import com.loja.model.Usuario;
 import com.loja.repositories.interfaces.IUsuarioRepository;
 
 import java.util.List;
 import java.util.Map;
 
-public class UsuarioBusiness {
+public class UsuarioBusiness implements IUsuarioBusiness {
     private IUsuarioRepository usuarioRepository;
 
     public UsuarioBusiness(IUsuarioRepository repository) {

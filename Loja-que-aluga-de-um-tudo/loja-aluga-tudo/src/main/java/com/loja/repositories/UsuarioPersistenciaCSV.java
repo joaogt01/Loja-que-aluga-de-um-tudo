@@ -45,7 +45,7 @@ public class UsuarioPersistenciaCSV implements IUsuarioRepository {
     }
 
     @Override
-    public Map<String, Usuario> listar(String perfil){
+    public Map<String, Usuario> listarPorPerfil(String perfil){
         return this.usuarios.entrySet().stream()
                 .filter(entry -> entry.getValue().getPerfil().equalsIgnoreCase(perfil))
                 .collect(Collectors.toMap(
