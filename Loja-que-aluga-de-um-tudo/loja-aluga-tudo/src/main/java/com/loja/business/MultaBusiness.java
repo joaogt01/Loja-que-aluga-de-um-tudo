@@ -26,9 +26,9 @@ public class MultaBusiness implements IMultaBusiness{
             throw new RuntimeException("Não é possível aplicar multa para um contrato nulo.");
         }
 
-        double valorAtraso = calcularAtraso(contrato);
+        BigDecimal valorAtraso = calcularAtraso(contrato);
 
-        if (valorAtraso <= 0){
+        if (valorAtraso.compareTo(BigDecimal.ZERO) <= 0){
             throw new RuntimeException("Este contrato não possui dias de atraso para aplicação da multa.");
         }
 
@@ -93,9 +93,9 @@ public class MultaBusiness implements IMultaBusiness{
         }
     }
 
-    public double calcularAtraso(ContratoAluguel contrato){
+    public BigDecimal calcularAtraso(ContratoAluguel contrato){
         if (contrato == null){
-            return 0.0;
+            return BigDecimal.ZERO;
         }
         LocalDate dataFinalCalculo = contrato.getDataEfetivaDevolucao() != null ? 
                                      contrato.getDataEfetivaDevolucao() : LocalDate.now();
@@ -103,13 +103,12 @@ public class MultaBusiness implements IMultaBusiness{
         long diasAtraso = ChronoUnit.DAYS.between(contrato.getDataPrevDevolucao(), dataFinalCalculo);
 
         if (diasAtraso <= 0){
-            return 0.0;
+            return BigDecimal.ZERO;
         }
 
         BigDecimal totalDiario = valorTaxaDiaria.multiply(BigDecimal.valueOf(diasAtraso));
-        BigDecimal resultadoFinal = valorFixoPenalidade.add(totalDiario);
 
-        return resultadoFinal.doubleValue();
+        return valorFixoPenalidade.add(totalDiario);
     }
 
     public boolean possuiMultaPendente(String clienteId) {
