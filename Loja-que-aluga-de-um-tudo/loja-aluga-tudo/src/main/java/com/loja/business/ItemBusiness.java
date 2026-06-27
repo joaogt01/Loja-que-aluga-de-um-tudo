@@ -2,12 +2,12 @@ package com.loja.business;
 
 import com.loja.business.interfaces.IItemBusiness;
 import com.loja.model.Categoria;
+import com.loja.model.Fornecedor;
 import com.loja.model.Item;
 import com.loja.repositories.interfaces.ICategoriaRepository;
 import com.loja.repositories.interfaces.IFornecedorRepository;
 import com.loja.repositories.interfaces.IItemRepository;
 
-import java.sql.DataTruncation;
 import java.util.Map;
 
 public class ItemBusiness implements IItemBusiness {
@@ -56,11 +56,24 @@ public class ItemBusiness implements IItemBusiness {
     public Map<String, Item> listarPorCategoria(Categoria categoria){
         if (categoria == null){
             throw new RuntimeException("Categoria inválida!");
+        } else if (categoria.getNome() == null || categoria.getNome().isBlank()) {
+            throw new RuntimeException("Nome da categoria inválida!");
         } else if (catRepo.buscar(categoria.getId()) == null){
             throw new RuntimeException("Categoria não cadastrada: " + categoria.getNome());
         }
         return repo.listar(categoria);
     };
+
+    public Map<String, Item> listarPorFornecedor(Fornecedor fornecedor){
+        if (fornecedor == null){
+            throw new RuntimeException("Fornecedor inválido!");
+        } else if (fornecedor.getNome() == null || fornecedor.getNome().isBlank()){
+            throw new RuntimeException("Nome do fornecedor inválido!");
+        } else if (fornRepo.buscar(fornecedor.getId()) == null){
+            throw new RuntimeException("Fornecedor não cadastrado: " + fornecedor.getNome());
+        }
+        return repo.listar(fornecedor);
+    }
 
     public void atualizar(Item item){
         if (item == null){
