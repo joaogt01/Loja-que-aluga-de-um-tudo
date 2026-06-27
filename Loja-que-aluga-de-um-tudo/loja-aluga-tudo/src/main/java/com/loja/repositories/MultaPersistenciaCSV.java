@@ -42,7 +42,7 @@ public class MultaPersistenciaCSV implements IMultaRepository {
                             maiorId = idNumerico;
                         }
                     } catch (NumberFormatException e) {
-                        System.err.println("Erro ao converter ID numérico válido: " + idExistente);
+                        throw new RuntimeException("ID numérico inválido encontrado no mapeamento interno: " + idExistente, e);
                     }
                 }
             }
@@ -134,7 +134,7 @@ public class MultaPersistenciaCSV implements IMultaRepository {
                 linha = leitor.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Não foi possível ler o arquivo CSV de multas.", e);
         }
     }
 
@@ -158,7 +158,7 @@ public class MultaPersistenciaCSV implements IMultaRepository {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Falha ao gravar os dados no arquivo CSV de multas.", e);
         }
     }
 }

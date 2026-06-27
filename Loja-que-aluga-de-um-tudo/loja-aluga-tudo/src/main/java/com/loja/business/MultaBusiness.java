@@ -2,6 +2,7 @@ package com.loja.business;
 
 import com.loja.model.ContratoAluguel;
 import com.loja.model.Multa;
+import com.loja.model.Cliente;
 import com.loja.repositories.interfaces.IMultaRepository;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class MultaBusiness {
+public class MultaBusiness implements IMultaBusiness{
 
     private IMultaRepository multaRepository;
     private static final BigDecimal valorFixoPenalidade = new BigDecimal("20.00");
@@ -71,6 +72,23 @@ public class MultaBusiness {
 
         existente.setStatus("QUITADA");
         multaRepository.salvar(existente);
+    }
+
+    public boolean possuiMultaPendente(String clienteId) {
+        if (clienteId == null || clienteId.trim().isEmpty()) {
+            return false;
+        }
+
+        for (Multa multa : multaRepository.listar().values()) {
+            if (multa.getContrato() != null 
+                    && multa.getContrato().getCliente() != null 
+                    && clienteId.equals(multa.getContrato().getCliente().getId())
+                    && "PENDENTE".equalsIgnoreCase(multa.getStatus())) {
+                return true; 
+            }
+        }
+
+        return false; 
     }
 
     public List<Multa> listarPorCliente(String clienteId) {
