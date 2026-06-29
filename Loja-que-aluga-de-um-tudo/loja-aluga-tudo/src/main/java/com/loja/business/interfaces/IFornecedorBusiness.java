@@ -14,5 +14,4 @@ public interface IFornecedorBusiness {
     public Map<String, Fornecedor> listar();
 
     public void deletar(String id);
-    
 }
