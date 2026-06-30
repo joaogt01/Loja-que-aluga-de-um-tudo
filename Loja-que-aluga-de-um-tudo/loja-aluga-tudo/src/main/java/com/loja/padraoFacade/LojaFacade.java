@@ -117,7 +117,7 @@ public class LojaFacade implements ILojaFacade{
     @Override
     public ContratoAluguel buscarContrato(String id) {
         if (id == null || id.trim().isEmpty()) throw new RuntimeException("ID de contrato inválido.");
-        return contratoBusiness.buscarContrato(id);
+        return contratoBusiness.buscar(id);
     }
 
     @Override
@@ -128,13 +128,13 @@ public class LojaFacade implements ILojaFacade{
 
     @Override
     public Map<String, ContratoAluguel> listarContratosAtivos() {
-        return contratoBusiness.listarContratosAtivos();
+        return contratoBusiness.listarAtivos();
     }
 
     @Override
     public Map<String, ContratoAluguel> consultarHistoricoCliente(String clienteId) {
         if (clienteId == null || clienteId.trim().isEmpty()) throw new RuntimeException("ID de cliente inválido para busca de histórico.");
-        return contratoBusiness.consultarHistoricoCliente(clienteId);
+        return contratoBusiness.listarPorCliente(clienteId);
     }
 
     /* =========================================================================
@@ -297,7 +297,7 @@ public class LojaFacade implements ILojaFacade{
         }
 
         for (ContratoAluguel contrato : contratoBusiness.listar().values()) {
-            Cliente cliente = (Cliente) usuarioBusiness.buscar(contrato.getCliente().getId());
+            Cliente cliente = (Cliente) usuarioBusiness.buscarPorId(contrato.getCliente().getId());
             Item item = itemBusiness.buscar(contrato.getItem().getId());
             contrato.setCliente(cliente);
             contrato.setItem(item);
