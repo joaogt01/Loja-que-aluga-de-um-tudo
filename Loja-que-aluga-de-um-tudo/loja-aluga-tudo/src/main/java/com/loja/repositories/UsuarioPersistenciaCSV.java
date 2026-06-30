@@ -8,6 +8,7 @@ import com.loja.repositories.interfaces.IUsuarioRepository;
 
 import java.io.*;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -16,9 +17,10 @@ public class UsuarioPersistenciaCSV implements IUsuarioRepository {
     private String caminhoArquivo;
     private Map<String, Usuario> usuarios;
 
-    public UsuarioPersistenciaCSV(String caminhoArquivo, Map<String, Usuario> usuarios) {
+    public UsuarioPersistenciaCSV(String caminhoArquivo) {
         this.caminhoArquivo = caminhoArquivo;
-        this.usuarios = usuarios;
+        this.usuarios = new HashMap<>();
+        this.carregarDados();
     }
 
     public String getCaminhoArquivo() { return caminhoArquivo; }
