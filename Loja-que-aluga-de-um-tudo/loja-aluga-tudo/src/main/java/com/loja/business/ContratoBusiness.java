@@ -1,6 +1,8 @@
 package com.loja.business;
 
 import com.loja.business.interfaces.IContratoBusiness;
+import com.loja.business.interfaces.IItemBusiness;
+import com.loja.business.interfaces.IUsuarioBusiness;
 import com.loja.model.Cliente;
 import com.loja.model.ContratoAluguel;
 import com.loja.model.Item;
@@ -14,10 +16,10 @@ import java.util.UUID;
 public class ContratoBusiness implements IContratoBusiness {
 
     private IContratoRepository repo;
-    private ItemBusiness itemBusiness;
-    private UsuarioBusiness usuarioBusiness;
+    private IItemBusiness itemBusiness;
+    private IUsuarioBusiness usuarioBusiness;
 
-    public ContratoBusiness(IContratoRepository repo, ItemBusiness itemBusiness, UsuarioBusiness usuarioBusiness) {
+    public ContratoBusiness(IContratoRepository repo, IItemBusiness itemBusiness, IUsuarioBusiness usuarioBusiness) {
         this.repo = repo;
         this.itemBusiness = itemBusiness;
         this.usuarioBusiness = usuarioBusiness;

@@ -15,9 +15,10 @@ public class ItemBusiness implements IItemBusiness {
     private ICategoriaRepository catRepo;
     private IFornecedorRepository fornRepo;
 
-    public ItemBusiness(IItemRepository repo, ICategoriaRepository catRepo){
+    public ItemBusiness(IItemRepository repo, ICategoriaRepository catRepo, IFornecedorRepository fornRepo){
         this.repo = repo;
         this.catRepo = catRepo;
+        this.fornRepo = fornRepo;
     }
 
     public void cadastrar(Item i){
