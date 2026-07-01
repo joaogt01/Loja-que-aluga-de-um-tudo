@@ -61,7 +61,7 @@ public class MenuLogin {
 
     private void redirecionar(Usuario usuario) {
         if (usuario instanceof Administrador adm) {
-            new MenuAdmin(facade, adm, scanner);
+            new MenuAdmin(facade, adm, scanner).exibir();
         } else if (usuario instanceof Funcionario func) {
             new MenuFuncionario(facade, func, scanner).exibir();
         } else if (usuario instanceof Cliente cliente) {
