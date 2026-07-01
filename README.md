@@ -1,101 +1,93 @@
-# Loja-que-aluga-de-um-tudo
-## Orientações Gerais
+# Divisão de Responsabilidades da Equipe
 
-* **Linguagem:** Java 21 (LTS)
-* **.gitignore:** Adicionem todos os arquivos de IDE e configurações pessoais ao arquivo `.gitignore`.
+## Arthur Dias
 
----
+### CRUD
 
-## Como Começar
+* CRUD de Fornecedor
 
-### Clone o repositório
+### Testes
 
-```bash
-git clone https://github.com/joaogt01/Loja-que-aluga-de-tudo && cd Loja-que-aluga-de-tudo
-```
+* Desenvolvimento dos testes automatizados na camada de fornecedor usando JUnit 5
 
----
+### Geral
 
-## Abrindo o Projeto
-
-### IntelliJ IDEA
-
-1. Abra o projeto:
-
-```bash
-idea .
-```
-
-2. Instale as dependências:
-
-```bash
-./mvnw clean install
-```
-
-### Visual Studio Code
-
-1. Abra o projeto:
-
-```bash
-code .
-```
-
-2. Instale as dependências:
-
-```bash
-./mvnw clean install
-```
+* Auxilio no desenvolvimento do Diagrama UML
+* Auxilio no desenvolvimento do Facade
 
 ---
 
-## Regras de Contribuição
+## Diego Lyra
 
-Para manter a organização do projeto, siga as orientações abaixo:
+### CRUD
 
-### Não faça push diretamente na `main`
+* CRUD de Multa
 
-Nunca realize alterações diretamente na branch `main`.
+### Testes
 
-### Atualize seu repositório local
+* Desenvolvimento dos testes automatizados na camada de Multa usando JUnit 5
 
-Antes de iniciar qualquer tarefa, execute:
+### Geral
 
-```bash
-git pull
-```
-
-### Crie uma branch para sua tarefa
-
-Utilize uma branch descritiva para cada funcionalidade ou correção:
-
-```bash
-git checkout -b feature/coloca-aqui-oq-o-codigo-faz
-```
-
-### Envie suas alterações
-
-Após finalizar sua tarefa:
-
-1. Faça o commit das alterações.
-2. Realize o push da sua branch para o repositório remoto.
-3. Abra um Pull Request para revisão.
+* Auxilio no desenvolvimento do Diagrama UML
+* Auxilio no desenvolvimento do Facade
+* Auxilio no desenvolvimento dos Menus
 
 ---
+## João Victor
 
-## Padrão de Commits
+### Configuração Inicial
 
-Sempre que possível, utilize o padrão **Conventional Commits** para manter o histórico organizado.
+* Criação e configuração da estrutura de pastas com Maven
 
-Referência:
+### CRUD
 
-https://github.com/iuricode/padroes-de-commits
+* CRUD de Usuários
 
-### Exemplos:
+### Testes
 
-```text
-feat: adiciona cadastro de produtos
-fix: corrige validação de estoque
-docs: atualiza documentação do projeto
-refactor: reorganiza camada de serviços
-test: adiciona testes para autenticação
-```
+* Desenvolvimento dos testes automatizados na camada de Usuários usando JUnit 5
+
+### Geral
+* Auxilio no desenvolvimento do Diagrama UML
+* Auxilio no desenvolvimento do Facade
+* Gerenciamento fluxo do repositório do github
+---
+
+## Kaua Pablo
+
+### Modelagem
+
+* Modelagem UML do sistema
+
+### CRUD
+
+* CRUD de Categorias
+* CRUD de Itens
+
+### Testes
+
+* Desenvolvimento dos testes automatizados na camada de Categorias e Itens usando JUnit 5
+
+### Geral
+* Auxilio no desenvolvimento dos Menus
+* Auxilio no desenvolvimento do Facade
+* desenvolvimento de relatórios
+
+
+## Renan Alves
+
+### CRUD
+
+* CRUD de Contrato
+
+### Testes
+
+* Desenvolvimento dos testes automatizados na camada de Contrato usando JUnit 5
+
+### Geral
+
+* Auxilio no desenvolvimento do Diagrama UML
+* Auxilio no desenvolvimento do Facade
+
+</content>
